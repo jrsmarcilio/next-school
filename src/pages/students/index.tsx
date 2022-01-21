@@ -8,6 +8,7 @@ import { HeaderContent } from '../../styles/Students'
 import Listing from '../../components/Listing';
 import { api } from '../../service/api'
 import { IStudent } from '../../interfaces/Students'
+import Search from '../../components/Search';
 
 
 export default function Students() {

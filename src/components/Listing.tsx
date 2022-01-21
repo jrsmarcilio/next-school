@@ -1,4 +1,5 @@
-import { Button, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Button, Paper, Table, TableBody, TableContainer, TableHead, TableRow, Stack, Pagination } from '@mui/material';
+
 import { StyledTableCell, StyledTableRow } from '../styles/MaterialUI'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -6,6 +7,14 @@ import { IStudent } from '../interfaces/Students';
 import { api } from '../service/api';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+
+function PaginationSize({ count }: { count: number }) {
+  return (
+    <Stack spacing={2} style={{ margin: '20px 0px' }}>
+      <Pagination count={count} size="small" />
+    </Stack>
+  );
+}
 
 export default function Listing({ students }: { students: IStudent[] }) {
   const router = useRouter();
@@ -34,38 +43,41 @@ export default function Listing({ students }: { students: IStudent[] }) {
   }
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell># {" "}</StyledTableCell>
-            <StyledTableCell align="right">Name</StyledTableCell>
-            <StyledTableCell align="right">Email</StyledTableCell>
-            <StyledTableCell align="right">Course</StyledTableCell>
-            <StyledTableCell align="right">Options</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {students?.map((student) => (
-            <StyledTableRow key={student.id}>
-              <StyledTableCell component="th" scope="row">
-                {student.id}
-              </StyledTableCell>
-              <StyledTableCell align="right">{student.name}</StyledTableCell>
-              <StyledTableCell align="right">{student.email}</StyledTableCell>
-              <StyledTableCell align="right">{student.course}</StyledTableCell>
-              <StyledTableCell align="right">
-                <Button onClick={editStudent(student?.id || 0)}>
-                  <EditIcon />
-                </Button>
-                <Button onClick={deleteStudent(student?.id || 0)}>
-                  <DeleteIcon />
-                </Button>
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell># {" "}</StyledTableCell>
+              <StyledTableCell align="right">Name</StyledTableCell>
+              <StyledTableCell align="right">Email</StyledTableCell>
+              <StyledTableCell align="right">Course</StyledTableCell>
+              <StyledTableCell align="right">Options</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {students?.map((student) => (
+              <StyledTableRow key={student.id}>
+                <StyledTableCell component="th" scope="row">
+                  {student.id}
+                </StyledTableCell>
+                <StyledTableCell align="right">{student.name}</StyledTableCell>
+                <StyledTableCell align="right">{student.email}</StyledTableCell>
+                <StyledTableCell align="right">{student.course}</StyledTableCell>
+                <StyledTableCell align="right">
+                  <Button onClick={editStudent(student?.id || 0)}>
+                    <EditIcon />
+                  </Button>
+                  <Button onClick={deleteStudent(student?.id || 0)}>
+                    <DeleteIcon />
+                  </Button>
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <PaginationSize count={students.length < 10 ? 1 : students.length / 10} />
+    </>
   );
 }

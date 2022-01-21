@@ -4,3 +4,8 @@ export interface IStudent {
   email: string;
   course: string;
 }
+
+export interface IUserLogin {
+  username: string;
+  password: string;
+}

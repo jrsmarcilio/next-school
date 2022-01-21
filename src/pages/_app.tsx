@@ -8,7 +8,7 @@ import createEmotionCache from '../styles/createEmotionCache';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const clientSideEmotionCache = createEmotionCache();
-
+import "../styles/global.css";
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
