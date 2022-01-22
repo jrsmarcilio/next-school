@@ -1,8 +1,8 @@
-import { Container, Divider, Typography } from '@mui/material';
-import { useRouter } from 'next/router';
+import { Container, Divider, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 
-import { HeaderContent } from '../../../styles/Students'
-import Form from '../../../components/Form';
+import { HeaderContent } from "../../../styles/Students";
+import Form from "../../../components/Form";
 
 export default function StudentsForm() {
   const routes = useRouter();

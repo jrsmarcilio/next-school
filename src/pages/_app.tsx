@@ -1,14 +1,15 @@
-import Head from 'next/head';
-import { AppProps } from 'next/app';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { CacheProvider, EmotionCache } from '@emotion/react';
-import theme from '../styles/theme';
-import createEmotionCache from '../styles/createEmotionCache';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import Head from "next/head";
+import { AppProps } from "next/app";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { CacheProvider, EmotionCache } from "@emotion/react";
+import theme from "../styles/theme";
+import createEmotionCache from "../styles/createEmotionCache";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const clientSideEmotionCache = createEmotionCache();
 import "../styles/global.css";
+
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }

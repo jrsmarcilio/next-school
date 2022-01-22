@@ -44,27 +44,33 @@ export default function Form({ id }: { id?: number }) {
 
   const onSubmit: SubmitHandler<IStudent> = (data) => {
     if (id) {
-      api.put(`/students/${id}`, data).then(response => {
-        if (response.status === 200) {
-          toast.success("Student updated successfully!", { autoClose: 1000 });
-          router.push('/students');
-        }
-      }).catch((error) => {
-        console.error(error);
-        toast.error("Error updating student!");
-      });
+      api
+        .put(`/students/${id}`, data)
+        .then((response) => {
+          if (response.status === 200) {
+            toast.success("Student updated successfully!", { autoClose: 1000 });
+            router.push("/students");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          toast.error("Error updating student!");
+        });
     } else {
-      api.post("/students", data).then((response) => {
-        if (response.status === 200) {
-          toast.success("Student created successfully!");
-          router.push('/students')
-        }
-      }).catch((error) => {
-        console.error(error);
-        toast.error("Error creating student!");
-      });
-    };
-  }
+      api
+        .post("/students", data)
+        .then((response) => {
+          if (response.status === 200) {
+            toast.success("Student created successfully!");
+            router.push("/students");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          toast.error("Error creating student!");
+        });
+    }
+  };
 
   return (
     <Box

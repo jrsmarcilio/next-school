@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Cookies from "js-cookie";
 import { Button, Container, Divider, Typography } from "@mui/material";
 
 import nodejs from "../../../public/node-js.png";
@@ -9,7 +8,6 @@ import { HeaderContent } from "../../styles/Students";
 import Listing from "../../components/Listing";
 import { api } from "../../service/api";
 import { IStudent } from "../../interfaces/Students";
-import Search from "../../components/Search";
 
 export default function Students() {
   const [students, setStudents] = React.useState<IStudent[]>([]);
