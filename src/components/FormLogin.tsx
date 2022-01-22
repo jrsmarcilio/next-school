@@ -13,8 +13,8 @@ export default function FormLogin() {
     formState: { errors },
   } = useForm<IUserLogin>();
 
-  const onSubmit: SubmitHandler<IUserLogin> = (data) => {
-    api
+  const onSubmit: SubmitHandler<IUserLogin> = async (data) => {
+    await api
       .post("/login", data)
       .then((response) => {
         console.log(response.data);

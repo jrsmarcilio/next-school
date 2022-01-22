@@ -1,5 +1,6 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://school-ads.herokuapp.com",
+  baseURL:
+    "https://cors-anywhere.herokuapp.com/https://school-ads.herokuapp.com",
 });
