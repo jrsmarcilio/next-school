@@ -1,28 +1,32 @@
-import React from 'react';
-import { Button, Container, Divider, Typography } from '@mui/material';
-import Link from 'next/link'
-import Image from 'next/image'
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import Cookies from "js-cookie";
+import { Button, Container, Divider, Typography } from "@mui/material";
 
-import nodejs from '../../../public/node-js.png'
-import { HeaderContent } from '../../styles/Students'
-import Listing from '../../components/Listing';
-import { api } from '../../service/api'
-import { IStudent } from '../../interfaces/Students'
-import Search from '../../components/Search';
-
+import nodejs from "../../../public/node-js.png";
+import { HeaderContent } from "../../styles/Students";
+import Listing from "../../components/Listing";
+import { api } from "../../service/api";
+import { IStudent } from "../../interfaces/Students";
+import Search from "../../components/Search";
 
 export default function Students() {
   const [students, setStudents] = React.useState<IStudent[]>([]);
-
   React.useEffect(() => {
-    function fetchStudents() {
-      api.get('/students').then(response => {
-        setStudents(response.data);
-      });
+    async function fetchStudents() {
+      await api
+        .get("/students")
+        .then((response) => {
+          setStudents(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
+
     fetchStudents();
   }, []);
-
 
   return (
     <Container maxWidth="xl">
@@ -39,12 +43,12 @@ export default function Students() {
         </Typography>
         <Button variant="outlined">
           <Link href="/students/form">
-            <a style={{ textDecoration: 'none' }}>Add new student</a>
+            <a style={{ textDecoration: "none" }}>Add new student</a>
           </Link>
         </Button>
       </HeaderContent>
       <Divider variant="fullWidth" />
-      <Listing students={students} />
+      {students && <Listing students={students} />}
     </Container>
   );
 }
