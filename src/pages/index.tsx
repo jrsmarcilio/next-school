@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Link from "../components/Link";
 import { Grid } from "@mui/material";
 import FormLogin from "../components/FormLogin";
 
@@ -112,10 +112,7 @@ const Home: NextPage = () => {
               <Typography variant="h6" component="h1">
                 &copy; &ensp; {new Date().getFullYear()}&ensp; School App &ensp;
                 - &ensp; By{" "}
-                <Link
-                  href="https://github.com/jrsmarcilio"
-                  style={{ color: "inherit" }}
-                >
+                <Link href="https://github.com/jrsmarcilio">
                   <a target="_blank">Marcílio Júnior</a>
                 </Link>
               </Typography>

@@ -1,19 +1,12 @@
 import React from "react";
-import {
-  TextField,
-  Button,
-  Box,
-  Grid,
-  Typography,
-  FormGroup,
-} from "@mui/material";
-
+import { useRouter } from "next/router";
 import { useForm, SubmitHandler } from "react-hook-form";
+
+import { TextField, Button, Box, Grid, Typography } from "@mui/material";
 
 import { IStudent } from "../interfaces/Students";
 import { api } from "../service/api";
 import { toast } from "react-toastify";
-import { useRouter } from "next/router";
 
 export default function Form({ id }: { id?: number }) {
   const defaultValues = { name: "", email: "", course: "" };
@@ -26,7 +19,6 @@ export default function Form({ id }: { id?: number }) {
     getValues,
     setValue,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<IStudent>({ defaultValues: defaultValues });
 

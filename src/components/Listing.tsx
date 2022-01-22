@@ -20,7 +20,7 @@ import { api } from "../service/api";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
-function PaginationSize({ count }: { count: number }) {
+export default function PaginationSize({ count }: { count: number }) {
   return (
     <Stack spacing={2} style={{ margin: "20px 0px" }}>
       <Pagination count={count} size="small" />

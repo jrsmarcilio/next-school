@@ -16,7 +16,7 @@
     "@emotion/styled": "latest",
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
-    "axios": "^0.24.0",
+    "axios": "^0.25.0",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
@@ -24,6 +24,7 @@
     "react-toastify": "^8.1.0"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/react": "latest",
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "@typescript-eslint/eslint-plugin-tslint": "^5.10.0",
