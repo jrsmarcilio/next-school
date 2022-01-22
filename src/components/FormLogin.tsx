@@ -17,7 +17,7 @@ export default function FormLogin() {
     await api
       .post("/login", data)
       .then((response) => {
-        console.log(response.data);
+        console.log(response);
         toast.success("Access successfully!");
       })
       .catch((error) => {
