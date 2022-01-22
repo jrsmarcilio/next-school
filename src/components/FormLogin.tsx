@@ -34,10 +34,10 @@ export default function FormLogin() {
       })
       .then((response) => {
         console.log(response);
-        if (response.status === 200) {
-          toast.success("Access successfully!");
-          router.push("/students");
-        }
+        // if (response.status === 200) {
+        //   toast.success("Access successfully!");
+        //   router.push("/students");
+        // }
       })
       .catch((error) => {
         console.error(error);
