@@ -7,8 +7,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Stack,
-  Pagination,
   Typography,
 } from "@mui/material";
 
@@ -19,14 +17,6 @@ import { IStudent } from "../interfaces/Students";
 import { api } from "../service/api";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
-
-export default function PaginationSize({ count }: { count: number }) {
-  return (
-    <Stack spacing={2} style={{ margin: "20px 0px" }}>
-      <Pagination count={count} size="small" />
-    </Stack>
-  );
-}
 
 export default function Listing({ students }: { students: IStudent[] | null }) {
   const router = useRouter();
@@ -101,7 +91,6 @@ export default function Listing({ students }: { students: IStudent[] | null }) {
           </TableBody>
         </Table>
       </TableContainer>
-      {/* <PaginationSize count={students.length < 10 ? 1 : students.length / 10} /> */}
     </>
   );
 }
