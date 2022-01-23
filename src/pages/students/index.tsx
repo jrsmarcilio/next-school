@@ -6,33 +6,17 @@ import { Button, Container, Divider, Typography } from "@mui/material";
 import nodejs from "../../../public/node-js.png";
 import { HeaderContent } from "../../styles/Students";
 import Listing from "../../components/Listing";
-import { api } from "../../service/api";
 import { IStudent } from "../../interfaces/Students";
 import Cookie from "js-cookie";
 
 export default function Students() {
-  const [students, setStudents] = React.useState<IStudent[]>([]);
+  const [students] = React.useState<IStudent[]>([]);
 
   React.useEffect(() => {
     async function fetchStudents() {
       const token = Cookie.get("token");
       console.log(token);
-
-      await api
-        .get("/students", {
-          headers: {
-            Cookie:
-              "connect.sid=s%3AxQMAGruQJDPL6A6EGY9uXU88y3NH0MZW.%2FL6fW%2FpqGNmWZfxEQuR8snrG%2FpQYyjePITsT5EPsrrU",
-          },
-        })
-        .then((response) => {
-          setStudents(response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
     }
-
     fetchStudents();
   }, []);
 
