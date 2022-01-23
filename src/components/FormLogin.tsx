@@ -14,16 +14,12 @@ export default function FormLogin() {
   } = useForm<IUserLogin>();
 
   const onSubmit: SubmitHandler<IUserLogin> = async (data) => {
-    await api
-      .post("/login", data)
-      .then((response) => {
-        console.log(response);
-        toast.success("Access successfully!");
-      })
-      .catch((error) => {
-        console.error(error);
-        toast.error("Error accessing the system!");
-      });
+    const response = await api.post("/login", data);
+
+    if (!response) return toast.error("Usuário ou senha inválidos!");
+
+    toast.success("Login realizado com sucesso!");
+    console.log(response.data);
   };
 
   return (
