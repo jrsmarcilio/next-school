@@ -8,16 +8,21 @@ import { HeaderContent } from "../../styles/Students";
 import Listing from "../../components/Listing";
 import { api } from "../../service/api";
 import { IStudent } from "../../interfaces/Students";
+import Cookie from "js-cookie";
 
 export default function Students() {
   const [students, setStudents] = React.useState<IStudent[]>([]);
 
   React.useEffect(() => {
     async function fetchStudents() {
+      const token = Cookie.get("token");
+      console.log(token);
+
       await api
         .get("/students", {
           headers: {
-            Cookie: "connect.sid=s%3ANqE6Yi2oO_pdSLU8RKUyQzpB8XBsfSek.M0pjeDQVbm%2FopT3WIRYcd7G0qYmi%2FMDE82j6wDtSzOE",
+            Cookie:
+              "connect.sid=s%3AxQMAGruQJDPL6A6EGY9uXU88y3NH0MZW.%2FL6fW%2FpqGNmWZfxEQuR8snrG%2FpQYyjePITsT5EPsrrU",
           },
         })
         .then((response) => {
