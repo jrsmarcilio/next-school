@@ -11,10 +11,15 @@ import { IStudent } from "../../interfaces/Students";
 
 export default function Students() {
   const [students, setStudents] = React.useState<IStudent[]>([]);
+
   React.useEffect(() => {
     async function fetchStudents() {
       await api
-        .get("/students")
+        .get("/students", {
+          headers: {
+            Cookie: "connect.sid=s%3ANqE6Yi2oO_pdSLU8RKUyQzpB8XBsfSek.M0pjeDQVbm%2FopT3WIRYcd7G0qYmi%2FMDE82j6wDtSzOE",
+          },
+        })
         .then((response) => {
           setStudents(response.data);
         })
