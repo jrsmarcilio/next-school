@@ -1,8 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { TextField, Button, Box, Grid, Typography } from "@mui/material";
 import { toast } from "react-toastify";
-import Cookies from "js-cookie";
-
 import { IUserLogin } from "../interfaces/Students";
 import { api } from "../service/api";
 
@@ -17,9 +15,6 @@ export default function FormLogin() {
     api
       .post("/login", data)
       .then((response) => {
-        const token = response.headers["set-cookie"];
-        console.log(token);
-        Cookies.set("token", "token");
         toast.success("Login realizado com sucesso!");
         console.log(response.data);
       })
