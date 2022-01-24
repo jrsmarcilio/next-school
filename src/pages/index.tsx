@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { Grid } from "@mui/material";
 import FormLogin from "../components/FormLogin";
+import theme from "../styles/theme";
 
 const Home: NextPage = () => {
   return (
@@ -42,7 +43,12 @@ const Home: NextPage = () => {
                   width={150}
                   height={150}
                 />
-                <Typography variant="h3" component="h1" gutterBottom>
+                <Typography
+                  variant="h3"
+                  component="h1"
+                  gutterBottom
+                  color="primary"
+                >
                   School App
                 </Typography>
                 <Typography variant="subtitle1" component="h1" gutterBottom>
@@ -67,7 +73,11 @@ const Home: NextPage = () => {
                   }}
                 >
                   <Typography variant="subtitle1" component="h1" gutterBottom>
-                    Access <strong>School App</strong> with your account
+                    Access{" "}
+                    <strong style={{ color: `${theme.palette.primary.main}` }}>
+                      School App
+                    </strong>{" "}
+                    with your account
                   </Typography>
                   <FormLogin />
                 </Box>
@@ -88,7 +98,13 @@ const Home: NextPage = () => {
                     Not a member yet?
                   </Typography>
                   <Link href="/register">
-                    <Typography variant="h6" component="h1" gutterBottom>
+                    <Typography
+                      variant="h6"
+                      component="h1"
+                      gutterBottom
+                      color="primary"
+                      style={{ cursor: "pointer" }}
+                    >
                       Register
                     </Typography>
                   </Link>
@@ -109,13 +125,6 @@ const Home: NextPage = () => {
                 color: "#2E7BB4",
               }}
             >
-              <Typography variant="h6" component="h1">
-                &copy; &ensp; {new Date().getFullYear()}&ensp; School App &ensp;
-                - &ensp; By{" "}
-                <Link href="https://github.com/jrsmarcilio">
-                  <a target="_blank">Marcílio Júnior</a>
-                </Link>
-              </Typography>
             </Box>
           </Grid>
         </Grid>

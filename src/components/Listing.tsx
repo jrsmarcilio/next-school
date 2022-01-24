@@ -25,7 +25,11 @@ export default function Listing({ students }: { students: IStudent[] | null }) {
     return (event: React.MouseEvent) => {
       event.preventDefault();
       api
-        .delete(`/students/${id}`)
+        .delete(`/students/${id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
         .then((response) => {
           if (response.status === 200) {
             toast.success("Student deleted successfully!", { autoClose: 1000 });

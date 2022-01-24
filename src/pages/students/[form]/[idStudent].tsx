@@ -2,7 +2,7 @@ import { Container, Divider, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 
 import { HeaderContent } from "../../../styles/Students";
-import Form from "../../../components/Form";
+import FormStudent from "../../../components/FormStudent";
 
 export default function StudentsForm() {
   const routes = useRouter();
@@ -16,7 +16,7 @@ export default function StudentsForm() {
         </Typography>
       </HeaderContent>
       <Divider variant="fullWidth" />
-      <Form id={Number(idStudent)} />
+      <FormStudent id={Number(idStudent)} />
     </Container>
   );
 }

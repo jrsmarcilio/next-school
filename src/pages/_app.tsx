@@ -8,6 +8,7 @@ import createEmotionCache from "../styles/createEmotionCache";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const clientSideEmotionCache = createEmotionCache();
+import Copyright from "../components/Copyright";
 import "../styles/global.css";
 
 interface MyAppProps extends AppProps {
@@ -25,6 +26,7 @@ export default function MyApp(props: MyAppProps) {
         <CssBaseline />
         <ToastContainer />
         <Component {...pageProps} />
+        <Copyright />
       </ThemeProvider>
     </CacheProvider>
   );

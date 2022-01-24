@@ -3,33 +3,41 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button, Container, Divider, Typography } from "@mui/material";
 
-import nodejs from "../../../public/node-js.png";
 import { HeaderContent } from "../../styles/Students";
 import Listing from "../../components/Listing";
 import { IStudent } from "../../interfaces/Students";
-import Cookie from "js-cookie";
+import { api } from "../../service/api";
 
 export default function Students() {
-  const [students] = React.useState<IStudent[]>([]);
+  const [studentData, setStudentData] = React.useState<IStudent[]>([]);
 
   React.useEffect(() => {
-    async function fetchStudents() {
-      const token = Cookie.get("token");
-      console.log(token);
+    async function fetchStudent() {
+      await api
+        .get("/students", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((response) => setStudentData(response.data))
+        .catch((error) => console.log(error));
     }
-    fetchStudents();
+    fetchStudent();
   }, []);
 
   return (
     <Container maxWidth="xl">
       <HeaderContent>
-        <Image
-          alt="Logo Node.js"
-          src={nodejs}
-          layout="intrinsic"
-          width={175}
-          height={113}
-        />
+        <Link href="/">
+          <a>
+            <Image
+              src="https://cdn-icons-png.flaticon.com/512/2038/2038157.png"
+              alt="logo"
+              width={100}
+              height={100}
+            />
+          </a>
+        </Link>
         <Typography variant="h1" component="h2">
           Students Listing
         </Typography>
@@ -40,7 +48,7 @@ export default function Students() {
         </Button>
       </HeaderContent>
       <Divider variant="fullWidth" />
-      {students && <Listing students={students} />}
+      {studentData && <Listing students={studentData} />}
     </Container>
   );
 }

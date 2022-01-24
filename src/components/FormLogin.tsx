@@ -1,27 +1,26 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { TextField, Button, Box, Grid, Typography } from "@mui/material";
 import { toast } from "react-toastify";
-import { IUserLogin } from "../interfaces/Students";
 import { api } from "../service/api";
+import { useRouter } from "next/router";
+
+import { IUserLogin } from "../interfaces/Students";
 
 export default function FormLogin() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IUserLogin>();
 
-  const onSubmit: SubmitHandler<IUserLogin> = (data) => {
-    api
-      .post("/login", data)
-      .then((response) => {
-        toast.success("Login realizado com sucesso!");
-        console.log(response.data);
-      })
-      .catch((error) => {
-        toast.error("Usuário ou senha inválidos!");
-        console.error(error);
-      });
+  const onSubmit: SubmitHandler<IUserLogin> = async (data) => {
+    await api.post("/sessions", data).then((response) => {
+      toast.success("Login Successful");
+      router.push("/students");
+      return localStorage.setItem("token", response.data.token);
+    });
   };
 
   return (

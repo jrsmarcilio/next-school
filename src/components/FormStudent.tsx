@@ -8,7 +8,7 @@ import { IStudent } from "../interfaces/Students";
 import { api } from "../service/api";
 import { toast } from "react-toastify";
 
-export default function Form({ id }: { id?: number }) {
+export default function FormStudent({ id }: { id?: number }) {
   const defaultValues = { name: "", email: "", course: "" };
   const [studentData, setStudentData] = React.useState<IStudent>();
 
@@ -24,20 +24,30 @@ export default function Form({ id }: { id?: number }) {
 
   React.useEffect(() => {
     if (id) {
-      api.get(`/students/${id}`).then((response) => {
-        setStudentData(response.data);
-        setValue("id", response.data.id);
-        setValue("name", response.data.name);
-        setValue("email", response.data.email);
-        setValue("course", response.data.course);
-      });
+      api
+        .get(`/students/${id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((response) => {
+          setStudentData(response.data);
+          setValue("id", response.data.id);
+          setValue("name", response.data.name);
+          setValue("email", response.data.email);
+          setValue("course", response.data.course);
+        });
     }
   }, [id]);
 
   const onSubmit: SubmitHandler<IStudent> = (data) => {
     if (id) {
       api
-        .put(`/students/${id}`, data)
+        .put(`/students/${id}`, data, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
         .then((response) => {
           if (response.status === 200) {
             toast.success("Student updated successfully!", { autoClose: 1000 });
@@ -50,7 +60,11 @@ export default function Form({ id }: { id?: number }) {
         });
     } else {
       api
-        .post("/students", data)
+        .post("/students", data, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
         .then((response) => {
           if (response.status === 200) {
             toast.success("Student created successfully!");
