@@ -43,14 +43,14 @@ export default function FormRegister({ user }: { user?: UserRegister }) {
       .post("/users", data)
       .then((response) => {
         if (response.status === 200) {
-          toast.success("User created successfully!");
+          toast.success(response.data.message || "User created successfully!");
           router.push("/");
           localStorage.removeItem("token");
         }
       })
       .catch((error) => {
         console.error(error);
-        toast.error("Error creating user!");
+        toast.error(error.response.data.error || "Error creating user!");
       });
   };
 

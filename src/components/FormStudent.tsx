@@ -61,7 +61,7 @@ export default function FormStudent({ id }: { id?: number }) {
         })
         .catch((error) => {
           console.error(error);
-          toast.error("Error updating student!");
+          toast.error(error.response.data.error || "Error updating student!");
         });
     } else {
       api
@@ -77,8 +77,7 @@ export default function FormStudent({ id }: { id?: number }) {
           }
         })
         .catch((error) => {
-          console.error(error);
-          toast.error("Error creating student!");
+          toast.error(error.response.data.error || "Error creating student!");
         });
     }
   };

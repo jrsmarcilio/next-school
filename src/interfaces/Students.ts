@@ -1,5 +1,5 @@
 export interface IStudent {
-  id: number | undefined;
+  id?: number;
   name: string;
   email: string;
   course: string;

@@ -1,4 +1,7 @@
+import React from "react";
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
+
 import Image from "next/image";
 import Link from "next/link";
 import Container from "@mui/material/Container";
@@ -7,8 +10,18 @@ import Box from "@mui/material/Box";
 import { Grid } from "@mui/material";
 import FormLogin from "../components/FormLogin";
 import theme from "../styles/theme";
+import { toast } from "react-toastify";
 
 const Home: NextPage = () => {
+  const router = useRouter();
+
+  React.useEffect(() => {
+    const message = router.query.message;
+    if (message) {
+      toast.success(message);
+    }
+  });
+
   return (
     <Container maxWidth="xl">
       <Box
@@ -124,8 +137,7 @@ const Home: NextPage = () => {
                 background: "#BBCDE8",
                 color: "#2E7BB4",
               }}
-            >
-            </Box>
+            ></Box>
           </Grid>
         </Grid>
       </Box>

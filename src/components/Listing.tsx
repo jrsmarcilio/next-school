@@ -13,10 +13,16 @@ import {
 import { StyledTableCell, StyledTableRow } from "../styles/MaterialUI";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { IStudent } from "../interfaces/Students";
 import { api } from "../service/api";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+
+interface IStudent {
+  id: number;
+  name: string;
+  email: string;
+  course: string;
+}
 
 export default function Listing({ students }: { students: IStudent[] | null }) {
   const router = useRouter();
@@ -49,7 +55,7 @@ export default function Listing({ students }: { students: IStudent[] | null }) {
       router.push(`/students/form/${id}`);
     };
   };
-  console.log(students);
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -64,7 +70,7 @@ export default function Listing({ students }: { students: IStudent[] | null }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {students ? (
+            {students?.length === 0 ? (
               students?.map((student) => (
                 <StyledTableRow key={student.id}>
                   <StyledTableCell component="th" scope="row">
@@ -80,10 +86,10 @@ export default function Listing({ students }: { students: IStudent[] | null }) {
                     {student.course}
                   </StyledTableCell>
                   <StyledTableCell align="right">
-                    <Button onClick={editStudent(student?.id || 0)}>
+                    <Button onClick={editStudent(student.id)}>
                       <EditIcon />
                     </Button>
-                    <Button onClick={deleteStudent(student?.id || 0)}>
+                    <Button onClick={deleteStudent(student.id)}>
                       <DeleteIcon />
                     </Button>
                   </StyledTableCell>
