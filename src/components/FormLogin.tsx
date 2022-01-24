@@ -16,11 +16,17 @@ export default function FormLogin() {
   } = useForm<IUserLogin>();
 
   const onSubmit: SubmitHandler<IUserLogin> = async (data) => {
-    await api.post("/sessions", data).then((response) => {
-      toast.success("Login Successful");
-      router.push("/students");
-      return localStorage.setItem("token", response.data.token);
-    });
+    await api
+      .post("/sessions", data)
+      .then((response) => {
+        toast.success("Login Successful");
+        router.push("/students");
+        return localStorage.setItem("token", response.data.token);
+      })
+      .catch((error) => {
+        toast.error("Login Failed. ");
+        console.error(error.message);
+      });
   };
 
   return (
@@ -34,6 +40,7 @@ export default function FormLogin() {
           <TextField
             type="text"
             placeholder="Student name"
+            autoComplete="current-username"
             fullWidth
             {...register("username", { required: true })}
           />

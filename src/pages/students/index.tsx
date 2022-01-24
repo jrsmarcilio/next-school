@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { Button, Container, Divider, Typography } from "@mui/material";
 
 import { HeaderContent } from "../../styles/Students";
@@ -10,19 +11,21 @@ import { api } from "../../service/api";
 
 export default function Students() {
   const [studentData, setStudentData] = React.useState<IStudent[]>([]);
+  const router = useRouter();
 
   React.useEffect(() => {
+    const token = localStorage.getItem("token");
     async function fetchStudent() {
       await api
         .get("/students", {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`,
           },
         })
         .then((response) => setStudentData(response.data))
         .catch((error) => console.log(error));
     }
-    fetchStudent();
+    token ? fetchStudent() : router.push("/");
   }, []);
 
   return (

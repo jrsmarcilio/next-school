@@ -11,7 +11,6 @@ import { toast } from "react-toastify";
 export default function FormStudent({ id }: { id?: number }) {
   const defaultValues = { name: "", email: "", course: "" };
   const [studentData, setStudentData] = React.useState<IStudent>();
-
   const router = useRouter();
 
   const {
@@ -39,6 +38,12 @@ export default function FormStudent({ id }: { id?: number }) {
         });
     }
   }, [id]);
+
+  React.useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) router.push("/");
+  }, []);
 
   const onSubmit: SubmitHandler<IStudent> = (data) => {
     if (id) {
