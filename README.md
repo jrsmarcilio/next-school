@@ -16,6 +16,14 @@
 "Esse projeto foi desenvolvido para a entrega final da disciplina de Web II da 2a Unidade do curso Tecnólogo em Análise e Desenvolvimento de Sistema.
 <br/>
 
+# Endpoints
+
+- `/` Home Page / LogIn
+- `/register` Página de cadastro de csuário
+- `/students` Páginas com a listagem dos estudantes
+- `/students/form` Página de cadastro de estudante
+- `/students/form/:id` Detalhe de um estudante selecionado
+
 # Tecnologias
 
 - [Next.js](https://github.com/vercel/next.js)
