@@ -6,11 +6,11 @@ import { Button, Container, Divider, Typography } from "@mui/material";
 
 import { HeaderContent } from "../../styles/Students";
 import Listing from "../../components/Listing";
-import { IStudent } from "../../interfaces/Students";
+import { IStudentDTO } from "../../interfaces/Students";
 import { api } from "../../service/api";
 
 export default function Students() {
-  const [studentData, setStudentData] = React.useState<IStudent[]>([]);
+  const [studentData, setStudentData] = React.useState<IStudentDTO[]>([]);
   const router = useRouter();
 
   React.useEffect(() => {

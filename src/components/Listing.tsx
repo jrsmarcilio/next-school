@@ -16,15 +16,14 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { api } from "../service/api";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { IStudentDTO } from "../interfaces/Students";
 
-interface IStudent {
-  id: number;
-  name: string;
-  email: string;
-  course: string;
-}
 
-export default function Listing({ students }: { students: IStudent[] | null }) {
+export default function Listing({
+  students,
+}: {
+  students: IStudentDTO[] | null;
+}) {
   const router = useRouter();
 
   const deleteStudent = (id: number) => {
