@@ -1,25 +1,27 @@
 import React from "react";
 import type { NextPage } from "next";
-import { useRouter } from "next/router";
-
 import Image from "next/image";
 import Link from "next/link";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import { Grid } from "@mui/material";
-import FormLogin from "../components/FormLogin";
-import theme from "../styles/theme";
+
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+
+import { Grid, Box, Container, Typography } from "@mui/material";
+
+import theme from "../styles/theme";
+import FormLogin from "../components/FormLogin";
 
 const Home: NextPage = () => {
   const router = useRouter();
 
   React.useEffect(() => {
     const message = router.query.message;
+    const token = localStorage.getItem("token");
     if (message) {
       toast.success(message);
     }
+
+    if (token) router.push("/students");
   });
 
   return (
@@ -60,7 +62,7 @@ const Home: NextPage = () => {
                   variant="h3"
                   component="h1"
                   gutterBottom
-                  color="primary"
+                  color="secondary.dark"
                 >
                   School App
                 </Typography>
@@ -87,7 +89,7 @@ const Home: NextPage = () => {
                 >
                   <Typography variant="subtitle1" component="h1" gutterBottom>
                     Access{" "}
-                    <strong style={{ color: `${theme.palette.primary.main}` }}>
+                    <strong style={{ color: `${theme.palette.secondary.dark}` }}>
                       School App
                     </strong>{" "}
                     with your account
@@ -115,7 +117,7 @@ const Home: NextPage = () => {
                       variant="h6"
                       component="h1"
                       gutterBottom
-                      color="primary"
+                      color="secondary.dark"
                       style={{ cursor: "pointer" }}
                     >
                       Register

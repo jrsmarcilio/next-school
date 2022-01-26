@@ -2,7 +2,7 @@ import { styled } from "@mui/system";
 
 export const HeaderContent = styled("div")(() => ({
   display: "flex",
-  justifyContent: "space-around",
+  justifyContent: "space-between",
   alignItems: "center",
   flexDirection: "row",
   margin: 30,

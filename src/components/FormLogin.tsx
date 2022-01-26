@@ -21,11 +21,13 @@ export default function FormLogin() {
       .then((response) => {
         toast.success("Login Successful");
         router.push("/students");
-        return localStorage.setItem("token", response.data.token);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("username", response.data.user.name);
       })
       .catch((error) => {
         toast.error("Login Failed. ");
-        console.error(error.message);
+        toast.error(error.response.data.error);
+        console.error(error.response.data.error);
       });
   };
 
@@ -66,7 +68,7 @@ export default function FormLogin() {
           <Button
             variant="contained"
             type="submit"
-            color="primary"
+            color="secondary"
             fullWidth
             sx={{ padding: 2 }}
           >

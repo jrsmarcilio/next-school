@@ -18,12 +18,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { IStudentDTO } from "../interfaces/Students";
 
-
-export default function Listing({
-  students,
-}: {
-  students: IStudentDTO[] | null;
-}) {
+export default function Listing({ students }: { students?: IStudentDTO[] }) {
   const router = useRouter();
 
   const deleteStudent = (id: number) => {
@@ -64,12 +59,13 @@ export default function Listing({
               <StyledTableCell># </StyledTableCell>
               <StyledTableCell align="right">Name</StyledTableCell>
               <StyledTableCell align="right">Email</StyledTableCell>
-              <StyledTableCell align="right">Course</StyledTableCell>
+              <StyledTableCell align="right">Register</StyledTableCell>
+              <StyledTableCell align="right">Gender</StyledTableCell>
               <StyledTableCell align="right">Options</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {students?.length === 0 ? (
+            {students ? (
               students?.map((student) => (
                 <StyledTableRow key={student.id}>
                   <StyledTableCell component="th" scope="row">
@@ -82,20 +78,27 @@ export default function Listing({
                     {student.email}
                   </StyledTableCell>
                   <StyledTableCell align="right">
-                    {student.course}
+                    {student.register}
                   </StyledTableCell>
                   <StyledTableCell align="right">
-                    <Button onClick={editStudent(student.id)}>
-                      <EditIcon />
+                    {student.gender}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    <Button onClick={editStudent(student?.id)}>
+                      <EditIcon color="secondary" />
                     </Button>
-                    <Button onClick={deleteStudent(student.id)}>
-                      <DeleteIcon />
+                    <Button onClick={deleteStudent(student?.id)}>
+                      <DeleteIcon color="secondary" />
                     </Button>
                   </StyledTableCell>
                 </StyledTableRow>
               ))
             ) : (
-              <Typography variant="h4">No students found!</Typography>
+              <StyledTableRow>
+                <StyledTableCell colSpan={8} align="center">
+                  <Typography variant="h5">No students found!</Typography>
+                </StyledTableCell>
+              </StyledTableRow>
             )}
           </TableBody>
         </Table>

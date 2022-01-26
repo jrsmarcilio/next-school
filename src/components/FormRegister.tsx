@@ -121,7 +121,7 @@ export default function FormRegister({ user }: { user?: UserRegister }) {
           <Button
             variant="contained"
             type="submit"
-            color="primary"
+            color="secondary"
             fullWidth
             sx={{ padding: 2 }}
           >

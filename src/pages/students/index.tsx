@@ -1,16 +1,33 @@
 import React from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import { Button, Container, Divider, Typography } from "@mui/material";
+import {
+  Button,
+  Container,
+  Divider,
+  Typography,
+  TextField,
+  Stack,
+  Autocomplete,
+} from "@mui/material";
+
+import SchoolIcon from "@mui/icons-material/School";
+import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
+
+import Listing from "../../components/Listing";
+import AppBar from "../../components/AppBar";
 
 import { HeaderContent } from "../../styles/Students";
-import Listing from "../../components/Listing";
 import { IStudentDTO } from "../../interfaces/Students";
+
 import { api } from "../../service/api";
+import FormCourse from "../../components/FormCourse";
 
 export default function Students() {
   const [studentData, setStudentData] = React.useState<IStudentDTO[]>([]);
+  const [studentFilter, setStudentFilter] = React.useState<IStudentDTO[]>([]);
+
+  const [isSearch, setIsSearch] = React.useState<boolean>(false);
+  const [modalCourse, setModalCourse] = React.useState<boolean>(false);
   const router = useRouter();
 
   React.useEffect(() => {
@@ -28,30 +45,67 @@ export default function Students() {
     token ? fetchStudent() : router.push("/");
   }, []);
 
+  const handleSearchChange = (event: React.SyntheticEvent) => {
+    const search = (event.target as HTMLInputElement).value;
+    const filter = studentData.filter((student) =>
+      student.name.toLowerCase().includes(search.toLowerCase())
+    );
+    setStudentFilter(filter);
+    search.length > 0 ? setIsSearch(true) : setIsSearch(false);
+  };
+
+  const handleModal = () =>
+    modalCourse ? setModalCourse(false) : setModalCourse(true);
+
   return (
-    <Container maxWidth="xl">
-      <HeaderContent>
-        <Link href="/">
-          <a>
-            <Image
-              src="https://cdn-icons-png.flaticon.com/512/2038/2038157.png"
-              alt="logo"
-              width={100}
-              height={100}
-            />
-          </a>
-        </Link>
-        <Typography variant="h1" component="h2">
-          Students Listing
-        </Typography>
-        <Button variant="outlined">
-          <Link href="/students/form">
-            <a style={{ textDecoration: "none" }}>Add new student</a>
-          </Link>
-        </Button>
-      </HeaderContent>
-      <Divider variant="fullWidth" />
-      {studentData && <Listing students={studentData} />}
-    </Container>
+    <>
+      <AppBar />
+      <Container maxWidth="xl">
+        <HeaderContent>
+          <Typography variant="h1" component="h2">
+            Students Listing
+          </Typography>
+
+          <section>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => router.push("/students/form")}
+              style={{ marginRight: 20 }}
+            >
+              <SchoolIcon style={{ marginRight: 10 }} /> Add new student
+            </Button>
+            <Button variant="contained" color="secondary" onClick={handleModal}>
+              <HistoryEduIcon style={{ marginRight: 10 }} />
+              Add new course
+            </Button>
+          </section>
+        </HeaderContent>
+
+        <Stack spacing={2} sx={{ margin: "40px 0" }}>
+          <Autocomplete
+            freeSolo
+            color="secondary"
+            options={studentData.map((student) => student.name)}
+            renderInput={(params) => (
+              <TextField
+                color="secondary"
+                {...params}
+                label="Search Student Name"
+                onChange={handleSearchChange}
+              />
+            )}
+          />
+        </Stack>
+
+        <Divider variant="fullWidth" />
+
+        {studentData && (
+          <Listing students={!isSearch ? studentData : studentFilter} />
+        )}
+
+        <FormCourse show={modalCourse} />
+      </Container>
+    </>
   );
 }
