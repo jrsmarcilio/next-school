@@ -33,7 +33,7 @@ export default function Listing({ students }: { students?: IStudentDTO[] }) {
         .then((response) => {
           if (response.status === 200) {
             toast.success("Student deleted successfully!", { autoClose: 1000 });
-            router.push("/students");
+            window.location.reload();
           }
         })
         .catch((error) => {

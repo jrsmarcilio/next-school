@@ -89,7 +89,9 @@ const Home: NextPage = () => {
                 >
                   <Typography variant="subtitle1" component="h1" gutterBottom>
                     Access{" "}
-                    <strong style={{ color: `${theme.palette.secondary.dark}` }}>
+                    <strong
+                      style={{ color: `${theme.palette.secondary.dark}` }}
+                    >
                       School App
                     </strong>{" "}
                     with your account
@@ -139,7 +141,21 @@ const Home: NextPage = () => {
                 background: "#BBCDE8",
                 color: "#2E7BB4",
               }}
-            ></Box>
+            >
+              <Typography variant="h6" component="h3">
+                If you can not activate e-mail,
+                <Link href="/activate-account">
+                  <a
+                    style={{
+                      margin: "0 5px",
+                      color: `${theme.palette.text.disabled}`,
+                    }}
+                  >
+                    click here
+                  </a>
+                </Link>
+              </Typography>
+            </Box>
           </Grid>
         </Grid>
       </Box>

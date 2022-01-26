@@ -33,7 +33,7 @@ export default function DenseAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={StyleAppBar}>
-        <Container maxWidth="lg">
+        <Container maxWidth="xl">
           <Toolbar variant="dense" style={StyleToolbar}>
             <section
               style={{
