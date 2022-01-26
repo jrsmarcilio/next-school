@@ -45,6 +45,9 @@ $ git clone https://github.com/jrsmarcilio/next-school.git
 
 # Entrar no diretório
 $ cd next-school
+
+# Instalar as dependências
+$ yarn or npm install
 ```
 
 ---
